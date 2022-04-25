@@ -24,6 +24,18 @@ public class EpuzzleState extends SearchState {
     	return puzzBoard;
     }
 
+    //change the position between n1 and n2
+    public void changePosition(int n1, int n2, ArrayList<EpuzzleState> eps) {
+    	int[] board = new int[9];
+    	for(int i=0; i<9; i++) {
+    		board[i]=puzzBoard[i];
+    	}
+    	int temp = board[n1];
+    	board[n1] = puzzBoard[n2];
+    	board[n2] = temp;
+    	eps.add(new EpuzzleState(board));
+    }
+
     @Override
     public boolean goalPredicate(Search searcher){
         EpuzzleSearch epSearcher = (EpuzzleSearch) searcher;
