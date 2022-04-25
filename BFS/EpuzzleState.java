@@ -59,44 +59,24 @@ public class EpuzzleState extends SearchState {
 	ArrayList<EpuzzleState> zplist = new ArrayList<EpuzzleState>();
 	ArrayList<SearchState> slist = new ArrayList<SearchState>();
 		 
-	switch(space) {
-	case 0:
-	    changePosition(space, 1, zplist);//space+1
-	    changePosition(space, 3, zplist);//space+3
-	case 1:
-            changePosition(space, 0, zplist);//space-1
-	    changePosition(space, 2, zplist);//space+1
-	    changePosition(space, 4, zplist);//space+3
-	case 2:
-	    changePosition(space, 1, zplist);//space-1
-	    changePosition(space, 5, zplist);//space+3
-	case 3:
-	    changePosition(space, 0, zplist);//space-3
-	    changePosition(space, 4, zplist);//space+1
-	    changePosition(space, 6, zplist);//space+3
-	case 4:
-	    changePosition(space, 1, zplist);//space-3
-	    changePosition(space, 3, zplist);//space-1
-	    changePosition(space, 5, zplist);//space+1
-	    changePosition(space, 7, zplist);//space+3
-	case 5:
-	    changePosition(space, 2, zplist);//space-3
-	    changePosition(space, 4, zplist);//space-1
-	    changePosition(space, 8, zplist);//space+3
-	case 6:
-	    changePosition(space, 3, zplist);//space-3
-	    changePosition(space, 7, zplist);//space+1
-	case 7:
-	    changePosition(space, 6, zplist);//space-1
-	    changePosition(space, 4, zplist);//space-3
-	    changePosition(space, 8, zplist);//space+1
-	case 8:
-	    changePosition(space, 7, zplist);//space-1
-	    changePosition(space, 5, zplist);//space-3
-	}
+	if (space != 0 && space != 3 && space != 6) {
+            changePosition(space-1, space, zplist);
+        }
+
+        if (space != 6 && space != 7 && space != 8) {
+            changePosition(space+3, space, zplist);
+        }
+
+        if (space != 0 && space != 1 && space != 2) {
+            changePosition(space-3, space, zplist);
+        }
+        
+        if (space != 2 && space != 5 && space != 8) {
+            changePosition(space+1, space, zplist);
+        }
 	    
 	for (EpuzzleState z : zplist) {
-		slist.add((SearchState) z);
+	    slist.add((SearchState) z);
 	}
 	return slist;
     }
