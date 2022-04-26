@@ -82,7 +82,7 @@ public class EpuzzleState extends SearchState {
     }
 
     @Override   
-    public boolean sameState(SearchState n2){
+    public boolean sameState(SearchState s){
         EpuzzleState epState = (EpuzzleState) s;
 	for(int i=0; i<epState.getPuzzBoard().length; i++) {
 	    if(puzzBoard[i] != epState.getPuzzBoard()[i]) {
