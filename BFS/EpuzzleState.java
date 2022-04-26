@@ -92,9 +92,13 @@ public class EpuzzleState extends SearchState {
 	return true;
     }
     public String toString() {
-	String output = "8 puzzle state: ";
+	String output = "8 puzzle state:\n";
+	int count=0;
 	for(int n:puzzBoard) {
-		output+=n;
+		output+=n+" ";
+		count++;
+		if(count%3 == 0){
+			output+="\n";
 	}
 	return output;
     }
