@@ -1,2 +1,6 @@
 # Com1005_Assignment_2022_YILI
-This is the YILI 's assignment in 05
+## Auther: YI LI
+## Date: 2022/4
+## Type: Algorithms - BFS & ASTAR
+## Universuty: university of Sheffield
+
