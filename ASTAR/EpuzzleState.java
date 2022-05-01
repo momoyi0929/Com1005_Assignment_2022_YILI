@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class EpuzzleState extends SearchState{
     
 	private int[][] puzz;
@@ -26,7 +28,7 @@ public class EpuzzleState extends SearchState{
     	return size;
     }
 
-    public void getSpace(int[][] board) {
+    public void setSpace(int[][] board) {
     	for(int i=0; i<size; i++) {
     		for(int j=0; j<size; j++) {
     			if(board[i][j] == 0) {
@@ -47,6 +49,7 @@ public class EpuzzleState extends SearchState{
 				}
 			}
 		}
+		this.estRemCost=count;
 		return count;
 	}
 	
@@ -68,6 +71,7 @@ public class EpuzzleState extends SearchState{
 				}
 			}
 		}
+		this.estRemCost=output;
 		return output;
 	}
 
@@ -100,7 +104,8 @@ public class EpuzzleState extends SearchState{
 	
 	@Override
 	ArrayList<SearchState> getSuccessors(Search searcher) {
-		getSpace(puzz);
+		
+		setSpace(puzz);
 		ArrayList<EpuzzleState> zplist = new ArrayList<EpuzzleState>();
 		ArrayList<SearchState> slist = new ArrayList<SearchState>();
 		
