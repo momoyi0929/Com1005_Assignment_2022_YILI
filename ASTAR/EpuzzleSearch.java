@@ -1,18 +1,19 @@
 public class EpuzzleSearch extends Search {
-	private int[][] puzz;
 	private int[][] goal;
 	
-	EpuzzleSearch(int[][]puzz,int[][]goal){
-		this.puzz=puzz;
-		this.goal=goal;
+	EpuzzleSearch(int[][] goal){
+		this.goal = new int[3][3];
+		for(int i=0; i<3; i++) {
+			for(int j=0; j<3; j++) {
+				this.goal[i][j]=goal[i][j];
+			}
+		}
 	}
 	
-	public int[][] getPuzz(){
-		return puzz;
-	}
 	
 	public int[][] getGoal(){
 		return goal;
 	}
+	
 	
 }
