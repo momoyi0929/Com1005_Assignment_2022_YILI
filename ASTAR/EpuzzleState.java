@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
 public class EpuzzleState extends SearchState{
     
 	private int[][] puzz;
@@ -49,7 +47,6 @@ public class EpuzzleState extends SearchState{
 				}
 			}
 		}
-		this.estRemCost=count;
 		return count;
 	}
 	
@@ -71,7 +68,6 @@ public class EpuzzleState extends SearchState{
 				}
 			}
 		}
-		this.estRemCost=output;
 		return output;
 	}
 
@@ -85,16 +81,15 @@ public class EpuzzleState extends SearchState{
 	   	int temp = board[i1][j1];
 	   	board[i1][j1] = puzz[i2][j2];
 	   	board[i2][j2] = temp;
-	   	eps.add(new EpuzzleState(board,1,Hamming(board)));
+	   	eps.add(new EpuzzleState(board, 1, Manhattan(board)));
 	}
 	 
 	@Override
 	boolean goalPredicate(Search searcher) {
 		EpuzzleSearch s = (EpuzzleSearch) searcher;
-		int[][] tar = s.getGoal();
 		for(int i=0; i<size; i++) {
 			for(int j=0; j<size; j++) {
-				if(tar[i][j] != this.puzz[i][j]) {
+				if(s.getGoal()[i][j] != this.puzz[i][j]) {
 					return false;
 				}
 			}
@@ -109,42 +104,35 @@ public class EpuzzleState extends SearchState{
 		ArrayList<EpuzzleState> zplist = new ArrayList<EpuzzleState>();
 		ArrayList<SearchState> slist = new ArrayList<SearchState>();
 		
-		if(spaceOfLine==0) {		
-			if(spaceOfColumn==0) {
-				changePosition(0,1,0,0,zplist);
-				changePosition(1,0,0,0,zplist);
-			}else if(spaceOfColumn==1){
-				changePosition(0,0,0,1,zplist);
-				changePosition(0,2,0,1,zplist);
-				changePosition(1,1,0,1,zplist);
-			}else if(spaceOfColumn==2) {
-				changePosition(0,1,0,2,zplist);
-				changePosition(1,2,0,2,zplist);
-			}
-		}else if(spaceOfLine==1) {
-			if(spaceOfColumn==0) {
-				changePosition(0,0,1,0,zplist);
-				changePosition(1,1,1,0,zplist);
-				changePosition(2,0,1,0,zplist);
-			}else if(spaceOfColumn==1){
-				changePosition(0,1,1,1,zplist);
-				changePosition(1,0,1,1,zplist);
-				changePosition(1,2,1,1,zplist);
-				changePosition(2,1,1,1,zplist);
-			}else if(spaceOfColumn==2) {
-				changePosition(0,1,1,2,zplist);
-				changePosition(1,2,1,2,zplist);
-			}
-		}else if(spaceOfLine==2) {
-			if(spaceOfColumn==0) {
-				changePosition(1,0,2,0,zplist);
-				changePosition(2,1,2,0,zplist);
-			}else if(spaceOfColumn==1){
-				changePosition(2,0,2,1,zplist);
-				changePosition(2,2,2,1,zplist);
-				changePosition(1,1,2,1,zplist);
-			}
+	    String s=String.valueOf(spaceOfLine)+","+String.valueOf(spaceOfColumn);
+		if(s.equals("0,0") || s.equals("0,2") || s.equals("1,1") || s.equals("1,2")) {
+			changePosition(0,1,spaceOfLine,spaceOfColumn,zplist);
 		}
+		if(s.equals("0,0") || s.equals("1,1") || s.equals("2,0")) {
+			changePosition(1,0,spaceOfLine,spaceOfColumn,zplist);
+		}
+		if(s.equals("0,1") || s.equals("1,0")) {
+			changePosition(0,0,spaceOfLine,spaceOfColumn,zplist);
+		}
+		if(s.equals("0,1")) {
+			changePosition(0,2,spaceOfLine,spaceOfColumn,zplist);
+		}
+		if(s.equals("0,1") || s.equals("1,1") || s.equals("2,1")) {
+			changePosition(1,1,spaceOfLine,spaceOfColumn,zplist);
+		}
+		if(s.equals("0,2") || s.equals("1,1") || s.equals("1,2") || s.equals("2,2")) {
+			changePosition(1,2,spaceOfLine,spaceOfColumn,zplist);
+		}
+		if(s.equals("1,0") || s.equals("2,1")) {
+			changePosition(2,0,spaceOfLine,spaceOfColumn,zplist);
+		}
+		if(s.equals("1,1") || s.equals("2,0") || s.equals("2,2")) {
+			changePosition(2,1,spaceOfLine,spaceOfColumn,zplist);
+		}
+		if(s.equals("2,1")) {
+			changePosition(2,2,spaceOfLine,spaceOfColumn,zplist);
+		}
+		
 		for (EpuzzleState z : zplist) {
 			slist.add((SearchState) z);
 		}
@@ -154,10 +142,9 @@ public class EpuzzleState extends SearchState{
 	@Override
 	boolean sameState(SearchState n2) {
 		EpuzzleState s = (EpuzzleState) n2;
-		int[][] p = s.getPuzz();
 		for(int i=0; i<size; i++) {
 			for(int j=0; j<size; j++) {
-				if(p[i][j] != this.puzz[i][j]) {
+				if(s.getPuzz()[i][j] != puzz[i][j]) {
 					return false;
 				}
 			}
