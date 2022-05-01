@@ -1,7 +1,4 @@
-
 import java.util.ArrayList;
-
-
 
 public class EpuzzleState extends SearchState{
     
@@ -76,8 +73,8 @@ public class EpuzzleState extends SearchState{
 
 	public void changePosition(int i1,int j1, int i2,int j2, ArrayList<EpuzzleState> eps) {
 	   	int[][] board = new int[3][3];
-	   	for(int i=0; i<9; i++) {
-	   		for(int j=0; j<9; j++) {
+	   	for(int i=0; i<size; i++) {
+	   		for(int j=0; j<size; j++) {
 	   			board[i][j]=puzz[i][j];
 	   		}
 	   	}
@@ -143,24 +140,6 @@ public class EpuzzleState extends SearchState{
 				changePosition(1,1,2,1,zplist);
 			}
 		}
-		
-		/**
-		if (space != 0 && space != 3 && space != 6) {
-		    changePosition(space-1, space, zplist);
-        }
-
-        if (space != 6 && space != 7 && space != 8) {
-        	changePosition(space+3, space, zplist);
-        }
-
-        if (space != 0 && space != 1 && space != 2) {
-        	changePosition(space-3, space, zplist);
-        }
-        
-        if (space != 2 && space != 5 && space != 8) {
-        	changePosition(space+1, space, zplist);
-        }
-		*/
 		for (EpuzzleState z : zplist) {
 			slist.add((SearchState) z);
 		}
