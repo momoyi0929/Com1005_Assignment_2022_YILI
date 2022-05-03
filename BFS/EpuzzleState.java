@@ -14,7 +14,11 @@ public class EpuzzleState extends SearchState {
 	private int[] puzzBoard; //puzzBoard stores the Epuzzle numbers
     private int space=0; // space stores the index of 0 in an Epuzzle array
     
-    //Constructor
+    /**
+     * constructor
+     * 
+     * @param puzzBoard int[]
+     */
     public EpuzzleState(int[] puzzBoard) {
     	this.puzzBoard=new int [puzzBoard.length];
     	for(int i=0; i<puzzBoard.length; i++) {
